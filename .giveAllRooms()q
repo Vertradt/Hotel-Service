@@ -1,0 +1,71 @@
+[33mcommit 5f83ebb807ed9fb2de4b423e05e784889db2beff[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/newFeature-2[m[33m, [m[1;31morigin/feature/newFeature-2[m[33m)[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sun Mar 1 23:15:02 2020 +0100
+
+    Room booking method aded
+
+[33mcommit 981a55363531c8e80ba342590f8daf903105afe4[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sun Mar 1 23:13:44 2020 +0100
+
+    Modification of method whitch returning list of all avaliable rooms
+
+[33mcommit 0fc5e749c3cb570d900e2e8deb7226e69b39c7de[m[33m ([m[1;32mfeature/newFeature-3[m[33m)[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sun Mar 1 14:50:09 2020 +0100
+
+    Method which returning list of avaliable rooms
+
+[33mcommit 4f71984ea190a9a33f8e21bfd0e0aabb600c7c4f[m[33m ([m[1;31morigin/feature/newFeature-1[m[33m, [m[1;32mfeature/newFeature-1[m[33m)[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sun Mar 1 14:00:30 2020 +0100
+
+    Created method which returning list of all rooms
+
+[33mcommit 0e7f1e2dff60ddb88d82c257b1f12f2489bb2a56[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sat Feb 29 23:01:10 2020 +0100
+
+    Created repository of room
+
+[33mcommit 6aa66d03635fa4b3e9cba10a91a3b109dc4f21aa[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sat Feb 29 23:00:42 2020 +0100
+
+    Created repository of room
+
+[33mcommit 5cc150d48fcf36fa851d53049a666f28695ffc95[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Sat Feb 29 22:29:02 2020 +0100
+
+    New Hotel-Service project has been aded
+
+[33mcommit 222f14d5e62bac01829d5c019c94d658f35611f9[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Thu Feb 27 22:22:36 2020 +0100
+
+    ignore file update
+
+[33mcommit 63660a8aba3a46281f4eb145fefa4bb0d3e7404d[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Thu Feb 27 22:21:09 2020 +0100
+
+    asdas
+
+[33mcommit b997f60b82c7c189b86c7a25597ca8f084d66355[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Thu Feb 27 22:17:42 2020 +0100
+
+    fragile file removing
+
+[33mcommit aaee7ea8c14516d98872b26c769579751dc85181[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Thu Feb 27 22:12:14 2020 +0100
+
+    ignore file added
+
+[33mcommit 36457e1c8dab8f6875bf8f4f1864a0a1af978546[m
+Author: Paweł Kózka <pawel.k.h1995@gmail.com>
+Date:   Thu Feb 27 21:27:50 2020 +0100
+
+    first commit

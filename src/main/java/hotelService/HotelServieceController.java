@@ -1,5 +1,6 @@
 package hotelService;
 
+
 import java.util.List;
 
 public class HotelServieceController {
@@ -11,10 +12,7 @@ public class HotelServieceController {
     private void services(Hotel hotel) {
         UserService us = new UserService(hotel);
         us.giveAllRooms();
-        List<Room> rooms = us.giveNotBusyRooms();
-        for (Room room : rooms) {
-            System.out.println(room);
-        }
+        List<Room> rooms2 = us.giveNotBooked();
 
     }
 
