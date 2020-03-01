@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hotel {
+    private Room room;
     private List<Room> rooms = new ArrayList<>();
 
     public Hotel() {
@@ -19,7 +20,9 @@ public class Hotel {
         rooms.add(new Room(10, 3, false));
     }
 
+
     public List<Room> getRooms() {
         return rooms;
     }
+
 }

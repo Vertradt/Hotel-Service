@@ -4,18 +4,15 @@ public class Room {
     private int id;
     private int numberOfBed;
     private boolean isBathroom;
-    private boolean isBusy;
+    private boolean booked;
 
     public Room(int id, int numberOfBed, boolean isBathroom) {
         this.id = id;
         this.numberOfBed = numberOfBed;
         this.isBathroom = isBathroom;
-        this.isBusy = false;
     }
 
-    public boolean isBusy() {
-        return isBusy;
-    }
+   
 
     @Override
     public String toString() {
