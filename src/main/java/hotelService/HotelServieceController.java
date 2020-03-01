@@ -8,12 +8,14 @@ public class HotelServieceController {
 
     private void services(Hotel hotel) {
         UserService us = new UserService(hotel);
+        us.giveAllRooms();
+
+
     }
 
     private Hotel giveRepositoryOfGame() {
         return new Hotel();
     }
-
 
 
 }
