@@ -13,6 +13,10 @@ public class Room {
         this.isBusy = false;
     }
 
+    public boolean isBusy() {
+        return isBusy;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Pokój");

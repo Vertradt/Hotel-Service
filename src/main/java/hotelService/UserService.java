@@ -19,5 +19,17 @@ public class UserService {
         return hotel.getRooms();
     }
 
+    public List<Room> giveNotBusyRooms() {
+        List<Room> rooms = hotel.getRooms();
+        List<Room> notBusyRooms = hotel.getRooms();
+
+        for (Room room : rooms) {
+            if (room.isBusy()) {
+                notBusyRooms.add(room);
+            }
+        }
+        return notBusyRooms;
+    }
+
 
 }
