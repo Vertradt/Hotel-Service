@@ -1,4 +1,7 @@
 package hotelService;
+
+import java.util.List;
+
 //    7. Dodaj klasę UserService która będzie służyć do obsługi hotelu. Na początek dodaj
 //        funkcjonalności:
 //        1. Pobierz listę wszystkich pokoi.
@@ -11,6 +14,7 @@ public class UserService {
     public UserService(Hotel hotel) {
         this.hotel = hotel;
     }
+
 
 
 }
