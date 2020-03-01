@@ -36,5 +36,13 @@ public class UserService {
         room.setBooking(true);
     }
 
+    void unbooking(Room room){
+        if(room.isBooked()) {
+            room.setBooking(false);
+        }
+    }
+
+
+
 
 }
