@@ -15,6 +15,10 @@ public class UserService {
         this.hotel = hotel;
     }
 
+    public List<Room> giveAllRooms() {
+        return hotel.getRooms();
+    }
+
 
 
 }

@@ -1,7 +1,5 @@
 package hotelService;
 
-import java.util.List;
-
 public class HotelServieceController {
     public void start() {
         Hotel hotel = giveRepositoryOfGame();
@@ -10,6 +8,7 @@ public class HotelServieceController {
 
     private void services(Hotel hotel) {
         UserService us = new UserService(hotel);
+        us.giveAllRooms();
 
 
     }
