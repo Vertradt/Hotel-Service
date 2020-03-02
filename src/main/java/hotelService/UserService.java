@@ -1,5 +1,6 @@
 package hotelService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //    7. Dodaj klasę UserService która będzie służyć do obsługi hotelu. Na początek dodaj
@@ -18,6 +19,30 @@ public class UserService {
     public List<Room> giveAllRooms() {
         return hotel.getRooms();
     }
+
+    public List<Room> giveNotBooked() {
+        List<Room> allRooms = hotel.getRooms();
+        List<Room> notBookedRooms = new ArrayList<>();
+
+        for (Room room : allRooms) {
+            if (!room.isBooked()) {
+                notBookedRooms.add(room);
+            }
+        }
+        return notBookedRooms;
+    }
+
+    void booking(Room room) {
+        room.setBooking(true);
+    }
+
+    void unbooking(Room room){
+        if(room.isBooked()) {
+            room.setBooking(false);
+        }
+    }
+
+
 
 
 
