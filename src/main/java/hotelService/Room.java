@@ -1,15 +1,15 @@
 package hotelService;
 
 public class Room {
-    private int id;
+    private int number;
     private int numberOfBed;
-    private boolean isBathroom;
+    private boolean bathroom;
     private boolean booked;
 
-    public Room(int id, int numberOfBed, boolean isBathroom) {
-        this.id = id;
+    public Room(int number, int numberOfBed, boolean bathroom) {
+        this.number = number;
         this.numberOfBed = numberOfBed;
-        this.isBathroom = isBathroom;
+        this.bathroom = bathroom;
     }
 
     public boolean isBooked() {
@@ -17,15 +17,16 @@ public class Room {
     }
 
 
-    public void setBooking(boolean booked) {
+    public void book(boolean booked) {
         this.booked = booked;
     }
+
 
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Pokój");
-        sb.append(" numer: ").append(id);
+        sb.append(" numer: ").append(number);
         sb.append(". Ilość miejsc: ").append(numberOfBed);
         sb.append('.');
         return sb.toString();

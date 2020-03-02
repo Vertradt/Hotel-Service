@@ -19,7 +19,25 @@ public class Hotel {
         rooms.add(new Room(10, 3, false));
     }
 
-    public List<Room> getRooms() {
+    public List<Room> getAllRooms() {
         return rooms;
     }
+
+    Room findBy(int number) {
+        return rooms.get(number);
+    }
+
+    List<Room> getAllAvaliableRooms() {
+        List<Room> rooms = getAllRooms();
+        List<Room> notBookedRooms = new ArrayList<>();
+        for (Room room : rooms) {
+            if (!room.isBooked()) {
+                notBookedRooms.add(room);
+            }
+        }
+
+        return notBookedRooms;
+    }
+
+
 }

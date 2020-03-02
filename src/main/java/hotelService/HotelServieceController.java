@@ -1,8 +1,6 @@
 package hotelService;
 
 
-import java.util.List;
-
 public class HotelServieceController {
     public void start() {
         Hotel hotel = giveRepositoryOfGame();
@@ -11,12 +9,30 @@ public class HotelServieceController {
 
     private void services(Hotel hotel) {
         UserService us = new UserService(hotel);
-        us.giveAllRooms();
-        us.booking(hotel.getRooms().get(2));
-        List<Room> rooms2 = us.giveNotBooked();
-        for (Room room : rooms2) {
-            System.out.println(room);
+        System.out.println("Wszystkie:");
+        for (Room allAvaliableRoom : hotel.getAllAvaliableRooms()) {
+            System.out.println(allAvaliableRoom);
         }
+        System.out.println("Po zabukowaniu:");
+        us.booking(3);
+        us.booking(4);
+        us.booking(5);
+        us.booking(6);
+        hotel.getAllAvaliableRooms();
+        for (Room allAvaliableRoom : hotel.getAllAvaliableRooms()) {
+            System.out.println(allAvaliableRoom);
+        }
+        System.out.println("Po odbukowaniu:");
+        us.unbooking(3);
+        us.unbooking(4);
+        us.unbooking(5);
+        us.unbooking(6);
+        hotel.getAllAvaliableRooms();
+        for (Room allAvaliableRoom : hotel.getAllAvaliableRooms()) {
+            System.out.println(allAvaliableRoom);
+        }
+
+
     }
 
     private Hotel giveRepositoryOfGame() {
