@@ -1,5 +1,7 @@
 package hotelService;
 
+import java.util.List;
+
 //    7. Dodaj klasę UserService która będzie służyć do obsługi hotelu. Na początek dodaj
 //        funkcjonalności:
 //        1. Pobierz listę wszystkich pokoi.
@@ -13,13 +15,29 @@ public class UserService {
         this.hotel = hotel;
     }
 
+    void displayAllRooms() {
+        List<Room> allRooms = hotel.getAllRooms();
+        for (Room room : allRooms) {
+            System.out.println(room);
+        }
+
+    }
+
+    void displayAvaliableRooms() {
+        List<Room> avaliable = hotel.getAllAvaliableRooms();
+
+
+    }
+
+
     void booking(int number) {
-        Room room = hotel.findBy(number-1);
+        Room room = hotel.findBy(number);
+
         room.book(true);
     }
 
     void unbooking(int number) {
-        Room room = hotel.findBy(number-1);
+        Room room = hotel.findBy(number);
         if (room.isBooked()) {
             room.book(false);
         }

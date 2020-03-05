@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Hotel {
     private List<Room> rooms = new ArrayList<>();
+    private Room room;
 
     public Hotel() {
         rooms.add(new Room(1, 1, true));
@@ -23,8 +24,15 @@ public class Hotel {
         return rooms;
     }
 
-    Room findBy(int number) {
-        return rooms.get(number);
+
+    Room findBy(int number){
+        Room room1 = null;
+        for (Room room : rooms) {
+            if (room.getNumber() == number) {
+                room1 = room;
+            }
+        }
+        return room1;
     }
 
     List<Room> getAllAvaliableRooms() {
