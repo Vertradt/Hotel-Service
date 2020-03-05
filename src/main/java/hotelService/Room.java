@@ -12,15 +12,17 @@ public class Room {
         this.bathroom = bathroom;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     public boolean isBooked() {
         return booked;
     }
 
-
     public void book(boolean booked) {
         this.booked = booked;
     }
-
 
 
     @Override
@@ -28,7 +30,12 @@ public class Room {
         final StringBuilder sb = new StringBuilder("Pokój");
         sb.append(" numer: ").append(number);
         sb.append(". Ilość miejsc: ").append(numberOfBed);
-        sb.append('.');
+        sb.append(". Status: ");
+        if (!booked) {
+            sb.append("wolny.");
+        } else {
+            sb.append("zajęty.");
+        }
         return sb.toString();
     }
 }
