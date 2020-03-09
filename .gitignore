@@ -127,7 +127,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 .flattened-pom.xml
-
+/
 .idea
 HotelService.iml
 pom.xml

@@ -53,7 +53,7 @@ public class HotelServieceController {
                     break;
                 case ALL_AVALIABLE_ROOMS:
                     System.out.println("Wszystkie dostępne pokoje:");
-                    us.displayAvaliableRooms();
+                    us.avaliableRooms();
                     break;
                 case BOOKING:
                     System.out.println("Rezerwacja.\nBy wykonać rezerwację wpisz numer danego pokoju.");
@@ -74,7 +74,7 @@ public class HotelServieceController {
     }
 
 
-    void menuDisplaing() {
+    private void menuDisplaing() {
         for (String s : menuPosition()) {
             System.out.println(s);
         }
