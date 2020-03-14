@@ -15,8 +15,8 @@ package hotelService;
 public class Main {
 
     public static void main(String[] args) {
-        Launcher launcher = new Launcher();
-        launcher.startProgram();
+        HotelServiceDemo hotelServiceDemo = new HotelServiceDemo();
+        hotelServiceDemo.startDemo();
         //main tworzy lanczer, lanczer tworzy kontroler a kontroler tworzy user service i hotel, nie do końca rozumiem podział obowiązków
         // na tym etapie projektu wystarczyłaby klasa "UserServiceDemo" w której jest main a w nim tworzysz sobie hotel, dajesz go userservisowi przez konstruktor
         // i testujesz czy wszystkie 4 funkcjonalności działają poprawnie wywołując je i udowadniając w konsoli wydrukiem że zwróciły prawidłowe listy albo
