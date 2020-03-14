@@ -22,7 +22,6 @@ class Hotel {
     List<Room> getAllRooms() {
         return rooms;
     }
-
     Room findBy(int number) throws HotelException {
         for (Room room : rooms) {
             if (room.getNumber() == number) {
@@ -45,7 +44,7 @@ class Hotel {
         return notBookedRooms;
     }
 
-    List<Room> getAllBookedRooms() {
+    public List<Room> getAllBookedRooms() {
         List<Room> rooms = getAllRooms();
         List<Room> bookedRooms = new ArrayList<>();
         for (Room room : rooms) {
@@ -54,6 +53,11 @@ class Hotel {
             }
         }
         return bookedRooms;
+    }
+
+    boolean roomsAreEmpty(){
+        return rooms.isEmpty();
+
     }
 
 

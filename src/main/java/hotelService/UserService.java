@@ -75,4 +75,7 @@ class UserService {
             throw new UnbookingException();
         }
     }
+    boolean empty(){
+        return hotel.roomsAreEmpty();
+    }
 }

@@ -119,37 +119,35 @@ public class HotelServieceController {
 
 
     private void unbookingOption() {
-        System.out.println("Odprawa.\nBy odbukować pokój wpisz numer danego pokoju.");
-        int listSize = bookedRoomHandling();
-        if (listSize == 0) { //Pomyślałem, że dobrze by było od razu zatrzymać wykonywanie metody gdy zostanie rzucony wyjątek
+        bookedRoomHandling();
+        if (hotel.getAllBookedRooms().isEmpty()) { //Pomyślałem, że dobrze by było od razu zatrzymać wykonywanie metody gdy zostanie rzucony wyjątek
             // , mówiący o tym, że wszystkie pokoje są wolne.
             return;
         }
+        System.out.println("By odbukować pokój wpisz numer danego pokoju.");
         int input2 = scanner.nextInt();
         userService.unbookingProcedure(input2);
     }
 
-    private int bookedRoomHandling() {
-        int size = 0;
+    private void bookedRoomHandling() {
         try {
-            size = showBookedRooms().size();
+            showBookedRooms();
         } catch (UnbookedRoomException e) {
             System.out.println(e.getMessage());
         }
-        return size;
 
 
     }
 
-    private List<Room> showBookedRooms() {
-        List<Room> rooms = hotel.getAllBookedRooms();
-        if (rooms.size() == 0) {
-            throw new UnbookedRoomException();
-        }
+    private void showBookedRooms() {
+        List<Room> rooms = userService.allBooked();
+        System.out.println("Wolne pokoje:");
         for (Room room : rooms) {
             System.out.println(room);
         }
-        return rooms;
+        if (hotel.roomsAreEmpty()) {
+            throw new UnbookedRoomException();
+        }
     }
 
     private boolean endGameOption() {
