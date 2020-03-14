@@ -6,21 +6,21 @@ public class Room {
     private boolean bathroom;
     private boolean booked;
 
-    public Room(int number, int numberOfBed, boolean bathroom) {
+    Room(int number, int numberOfBed, boolean bathroom) {
         this.number = number;
         this.numberOfBed = numberOfBed;
         this.bathroom = bathroom;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return this.number;
     }
 
-    public boolean isBooked() {
+    boolean isBooked() {
         return booked;
     }
 
-    public void book(boolean booked) {
+    void book(boolean booked) {
         this.booked = booked;
     }
 

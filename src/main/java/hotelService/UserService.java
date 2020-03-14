@@ -8,40 +8,71 @@ import java.util.List;
 //        2. Pobierz listę wszystkich dostępnych pokoi.
 //        3. Rezerwuj pokój (podaj nr pokoju i jeśli jest dostępny to go zarezerwuj).
 //        4. Zwolnij pokój (podaj nr pokoju i jeśli jest zajęty to go zwolnij).
-public class UserService {
+class UserService {
     private Hotel hotel;
 
-    public UserService(Hotel hotel) {
+    UserService(Hotel hotel) {
         this.hotel = hotel;
     }
 
-    void displayAllRooms() {
-        List<Room> allRooms = hotel.getAllRooms();
-        for (Room room : allRooms) {
-            System.out.println(room);
+    List<Room> allRooms() {
+        return hotel.getAllRooms();
+    }
+
+    List<Room> avaliableRooms() {
+        return hotel.getAllAvaliableRooms();
+    }
+
+    List<Room> allBooked() {
+        return hotel.getAllBookedRooms();
+    }
+
+
+    void bookingProcedure(int number) {
+        do {
+            bookingHandling(number);
+        } while (!hotel.findBy(number).isBooked());
+    }
+
+    private void bookingHandling(int number) {
+        try {
+            booking(number);
+        } catch (BookingException e) {
+            System.out.println(e.getMessage());
         }
-
     }
 
-    void displayAvaliableRooms() {
-        List<Room> avaliable = hotel.getAllAvaliableRooms();
-
-
-    }
-
-
-    void booking(int number) {
+    private void booking(int number) throws BookingException {
         Room room = hotel.findBy(number);
-
+        if (room.isBooked()) {
+            throw new BookingException();
+        }
         room.book(true);
+
     }
 
-    void unbooking(int number) {
+    void unbookingProcedure(int number) {
+        do {
+            unbookingHandling(number);
+        } while (hotel.findBy(number).isBooked());
+    }
+
+
+    private void unbookingHandling(int number) {
+        try {
+            unbooking(number);
+        } catch (UnbookingException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    private void unbooking(int number) throws UnbookingException {
         Room room = hotel.findBy(number);
         if (room.isBooked()) {
             room.book(false);
+        } else {
+            throw new UnbookingException();
         }
     }
-
-
 }
