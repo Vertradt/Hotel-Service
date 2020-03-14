@@ -46,6 +46,9 @@ class Hotel {
 
     public List<Room> getAllBookedRooms() {
         List<Room> rooms = getAllRooms();
+//        if(rooms.isEmpty()){
+//            throw new UnbookedRoomException();
+//        }
         List<Room> bookedRooms = new ArrayList<>();
         for (Room room : rooms) {
             if (room.isBooked()) {
@@ -53,6 +56,7 @@ class Hotel {
             }
         }
         return bookedRooms;
+
     }
 
     boolean roomsAreEmpty(){

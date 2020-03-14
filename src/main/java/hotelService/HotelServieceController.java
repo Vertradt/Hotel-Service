@@ -140,12 +140,12 @@ public class HotelServieceController {
     }
 
     private void showBookedRooms() {
-        List<Room> rooms = userService.allBooked();
+        List<Room> rooms = hotel.getAllBookedRooms();
         System.out.println("Wolne pokoje:");
         for (Room room : rooms) {
             System.out.println(room);
         }
-        if (hotel.roomsAreEmpty()) {
+        if (hotel.getAllBookedRooms().isEmpty()) {
             throw new UnbookedRoomException();
         }
     }
