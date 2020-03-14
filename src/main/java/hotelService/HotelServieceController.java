@@ -21,11 +21,8 @@ public class HotelServieceController {
         this.userService = userService;
     }
 
-    void start() {
-        demonstrateFeature();
-    }
 
-    private void demonstrateFeature() {
+    void demonstrateFeature() {
         menuManager();
     }
 
