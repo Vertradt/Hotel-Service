@@ -84,7 +84,9 @@ public class HotelServieceController {
 
     private MenuOptions choice() {
         int menu = scanner.nextInt();
-        if (menu > MenuOptions.values().length) {
+
+
+        if (menu - 1 >= MenuOptions.ENGAME.getOptionNumber()) {
             throw new ChoiceException();
         }
         return MenuOptions.values()[menu - 1]; //To chyba można zrobić lepiej. Ale nie wiem jak.
