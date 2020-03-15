@@ -20,8 +20,12 @@ public class Room {
         return booked;
     }
 
-    void book(boolean booked) {
-        this.booked = booked;
+    void book() {
+        booked = true;
+    }
+
+    void unbook() {
+        booked = false;
     }
 
 

@@ -6,17 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class HotelServieceController {
-    private final static int ALL_ROOMS = 1;
-    private final static int ALL_AVALIABLE_ROOMS = 2;
-    private final static int BOOKING = 3;
-    private final static int UNBOOKING = 4;
-    private final static int ENGAME = 5;
-    private Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
     private Hotel hotel;
     private UserService userService;
+    private boolean gameOver;
 
-    HotelServieceController(Scanner scanner, Hotel hotel, UserService userService) {
-        this.scanner = scanner;
+    HotelServieceController(Hotel hotel, UserService userService) {
         this.hotel = hotel;
         this.userService = userService;
     }
@@ -38,7 +33,7 @@ public class HotelServieceController {
         boolean gameOver = false;
         try {
             gameOver = menu();
-        } catch (HotelException e) {
+        } catch (ChoiceException | HotelException | BookingException | UnbookingException e) {
             System.out.println(e.getMessage());
         }
         return gameOver;
@@ -46,26 +41,7 @@ public class HotelServieceController {
 
     private boolean menu() {
         menuDisplaing();
-        boolean gameOver = false;
-        int menu = scanner.nextInt();
-        switch (menu) {
-            case ALL_ROOMS:
-                allRoomsDisplaingOption();
-                break;
-            case ALL_AVALIABLE_ROOMS:
-                allAvaliableRoomsDisplaingOption();
-                break;
-            case BOOKING:
-                bookingOption();
-                break;
-            case UNBOOKING:
-                unbookingOption();
-                break;
-            case ENGAME:
-                gameOver = endGameOption();
-                break;
-        }
-        return gameOver;
+        return menuSwitcher();
     }
 
     private List<String> menuPosition() {
@@ -83,6 +59,35 @@ public class HotelServieceController {
         for (String s : menuPosition()) {
             System.out.println(s);
         }
+    }
+
+    private boolean menuSwitcher() {
+        switch (choice()) {
+            case ALL_ROOMS:
+                allRoomsDisplaingOption();
+                break;
+            case ALL_AVALIABLE_ROOMS:
+                allAvaliableRoomsDisplaingOption();
+                break;
+            case BOOKING:
+                bookingOption();
+                break;
+            case UNBOOKING:
+                unbookingOption();
+                break;
+            case ENGAME:
+                endGameOption();
+                break;
+        }
+        return this.gameOver;
+    }
+
+    private MenuOptions choice() {
+        int menu = scanner.nextInt();
+        if (menu > MenuOptions.values().length) {
+            throw new ChoiceException();
+        }
+        return MenuOptions.values()[menu - 1]; //To chyba można zrobić lepiej. Ale nie wiem jak.
     }
 
     private void allRoomsDisplaingOption() {
@@ -113,31 +118,21 @@ public class HotelServieceController {
         System.out.println("Rezerwacja.\nBy wykonać rezerwację wpisz numer danego pokoju.");
         showAvaliableRooms();
         System.out.print("Wybrany pokój:");
-        int input1 = scanner.nextInt();
-        userService.bookingProcedure(input1);
+        int input = scanner.nextInt();
+        userService.booking(input);
     }
 
 
     private void unbookingOption() {
-        bookedRoomHandling();
-        if (hotel.getAllBookedRooms().isEmpty()) { //Pomyślałem, że dobrze by było od razu zatrzymać wykonywanie metody gdy zostanie rzucony wyjątek
-            // , mówiący o tym, że wszystkie pokoje są wolne.
+        showBookedRooms();
+        if (hotel.getAllBookedRooms().isEmpty()) {
             return;
         }
         System.out.println("By odbukować pokój wpisz numer danego pokoju.");
-        int input2 = scanner.nextInt();
-        userService.unbookingProcedure(input2);
+        int input = scanner.nextInt();
+        userService.unbooking(input);
     }
 
-    private void bookedRoomHandling() {
-        try {
-            showBookedRooms();
-        } catch (UnbookedRoomException e) {
-            System.out.println(e.getMessage());
-        }
-
-
-    }
 
     private void showBookedRooms() {
         List<Room> rooms = hotel.getAllBookedRooms();
@@ -145,14 +140,14 @@ public class HotelServieceController {
         for (Room room : rooms) {
             System.out.println(room);
         }
-        if (hotel.getAllBookedRooms().isEmpty()) {
-            throw new UnbookedRoomException();
+        if (rooms.isEmpty()) {
+            System.out.println("Wszystkie pokoje są wolne.");
         }
     }
 
-    private boolean endGameOption() {
+    private void endGameOption() {
         System.out.println("Wyjście z programu");
-        return true;
+        gameOver = true;
     }
 
 }
