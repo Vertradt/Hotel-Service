@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public class HotelServieceController {
     private Scanner scanner = new Scanner(System.in);
     private Hotel hotel;
@@ -32,8 +34,8 @@ public class HotelServieceController {
     private void menuHandling() {
         try {
             menu();
-        } catch (ChoiceException | HotelException | GuestAgeException | BookingException | UnbookingException e) {
-            System.out.println(e.getMessage());
+        } catch (ChoiceException | HotelException | GuestAgeException | BookingException | CleanlinessException | UnbookingException e) {
+            out.println(e.getMessage());
         }
     }
 
@@ -47,15 +49,16 @@ public class HotelServieceController {
         menu.add("1. Wyświetlanie wszystkich pokoi.");
         menu.add("2. Wszystkie dostępne pokoje.");
         menu.add("3. Bookowanie pokoju.");
-        menu.add("4. Odbookowanie pokoju.");
-        menu.add("5. Wyjście z programu.");
+        menu.add("4. Sprzątanie pokoju.");
+        menu.add("5. Odbookowanie pokoju.");
+        menu.add("6. Wyjście z programu.");
 
         return menu;
     }
 
     private void menuDisplaing() {
         for (String s : menuPosition()) {
-            System.out.println(s);
+            out.println(s);
         }
     }
 
@@ -66,6 +69,9 @@ public class HotelServieceController {
                 break;
             case ALL_AVALIABLE_ROOMS:
                 allAvaliableRoomsDisplaingOption();
+                break;
+            case CLEANING:
+                cleaningOption();
                 break;
             case BOOKING:
                 bookingOption();
@@ -88,63 +94,97 @@ public class HotelServieceController {
     }
 
     private void allRoomsDisplaingOption() {
-        System.out.println("Wszystkie pokoje:");
+        out.println("Wszystkie pokoje:");
         showAllRooms();
     }
 
     private void showAllRooms() {
         List<Room> rooms = userService.allRooms();
         for (Room room : rooms) {
-            System.out.println(room);
+            out.println(room);
         }
     }
 
     private void allAvaliableRoomsDisplaingOption() {
-        System.out.println("Wszystkie dostępne pokoje:");
+        out.println("Wszystkie dostępne pokoje:");
         showAvaliableRooms();
     }
 
     private void showAvaliableRooms() {
         List<Room> rooms = userService.availableRooms();
         for (Room room : rooms) {
-            System.out.println(room);
+            out.println(room);
         }
     }
 
     private void bookingOption() {
-        System.out.println("Rezerwacja.\nBy wykonać rezerwację wpisz numer danego pokoju.");
+        out.println("Rezerwacja.\nBy wykonać rezerwację wpisz numer danego pokoju.");
         showAvaliableRooms();
-        System.out.print("Wybrany pokój:");
-        int input = scanner.nextInt();
-        List<Guest> guests = listOfGuest(input);
-        userService.booking(input, guests);
-        System.out.println("Zarezerwowano pokój");
+        Room room = chosenRoom();
+        List<Guest> guests = listOfGuest(room);
+        userService.booking(room, guests);
+        out.println("Zarezerwowano pokój");
 
 
     }
 
-    private List<Guest> listOfGuest(int input) {
+    private Room chosenRoom() {
+        out.print("Wybrany pokój:");
+        int input = scanner.nextInt();
+        Room room = userService.findRoom(input);
+        userService.validateCleanliness(room);
+        return room;
+    }
+
+    private List<Guest> listOfGuest(Room room) {
         List<Guest> guests = new ArrayList<>();
         int i = 0;
         do {
             Guest guest = addOneGuest();
             guests.add(guest);
             i++;
-        } while (i < hotel.findBy(input).getNumberOfBed());
+        } while (i < room.getNumberOfBed());
 
         return guests;
     }
 
     private Guest addOneGuest() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wprowadź imie");
+        out.println("Wprowadź imie");
         String imie = scanner.nextLine();
-        System.out.println("Wprowadź nazwisko:");
+        out.println("Wprowadź nazwisko:");
         String nazwisko = scanner.nextLine();
-        System.out.println("Wprowadź datę urodzenia gościa (format: rok-miesiąc-dzień):");
+        out.println("Wprowadź datę urodzenia gościa (format: rok-miesiąc-dzień):");
         LocalDate localDate = LocalDate.parse(scanner.nextLine());
 
         return new Guest(imie, nazwisko, localDate);
+    }
+
+    private void cleaningOption() {
+        out.println("Wybrano sprządnie.");
+        List<Room> rooms = hotel.uncleanRooms();
+        if (rooms.isEmpty()) {
+            out.println("Wszystkie pokoje są czyste.");
+            return;
+        }
+        showDiryRooms(rooms);
+
+        roomCleaning();
+    }
+
+    private void showDiryRooms(List<Room> rooms) {
+
+        out.println("Brudne pokoje:");
+        for (Room room : rooms) {
+            out.println(room);
+        }
+
+    }
+
+    private void roomCleaning() {
+        out.println("Wprowadź numer pokoju, który chcesz posprzątać.");
+        Room room = hotel.findBy(scanner.nextInt());
+        hotel.cleaning(room);
     }
 
     private void unbookingOption() {
@@ -152,7 +192,7 @@ public class HotelServieceController {
         if (hotel.getAllBookedRooms().isEmpty()) {
             return;
         }
-        System.out.println("By odbukować pokój wpisz numer danego pokoju.");
+        out.println("By odbukować pokój wpisz numer danego pokoju.");
         int input = scanner.nextInt();
         userService.unbooking(input);
     }
@@ -160,17 +200,17 @@ public class HotelServieceController {
 
     private void showBookedRooms() {
         List<Room> rooms = hotel.getAllBookedRooms();
-        System.out.println("Wolne pokoje:");
+        out.println("Wolne pokoje:");
         for (Room room : rooms) {
-            System.out.println(room);
+            out.println(room);
         }
         if (rooms.isEmpty()) {
-            System.out.println("Wszystkie pokoje są wolne.");
+            out.println("Wszystkie pokoje są wolne.");
         }
     }
 
     private void endGameOption() {
-        System.out.println("Wyjście z programu");
+        out.println("Wyjście z programu");
         gameOver = true;
     }
 

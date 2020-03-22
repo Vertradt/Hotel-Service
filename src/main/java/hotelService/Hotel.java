@@ -20,6 +20,7 @@ class Hotel {
         rooms.add(new Room(10, 3, false));
     }
 
+
     List<Room> getAllRooms() {
         return rooms;
     }
@@ -56,6 +57,21 @@ class Hotel {
         }
         return bookedRooms;
 
+    }
+
+    void cleaning(Room room) {
+        room.reClean();
+    }
+
+    List<Room> uncleanRooms() {
+        List<Room> rooms = getAllRooms();
+        List<Room> dirty = new ArrayList<>();
+        for (Room room : rooms) {
+            if (!room.isClean()) {
+                dirty.add(room);
+            }
+        }
+        return dirty;
     }
 
 

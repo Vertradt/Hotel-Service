@@ -8,13 +8,15 @@ public class Room {
     private int numberOfBed;
     private boolean bathroom;
     private boolean booked;
+    private boolean clean;
     private List<Guest> guests = new ArrayList<>();
+
 
     Room(int number, int numberOfBed, boolean bathroom) {
         this.number = number;
         this.numberOfBed = numberOfBed;
         this.bathroom = bathroom;
-
+        clean = true;
     }
 
     int getNumber() {
@@ -37,9 +39,20 @@ public class Room {
         booked = false;
     }
 
-
     void addGuest(List<Guest> newGuests) {
         guests.addAll(newGuests);
+    }
+
+    public boolean isClean() {
+        return clean;
+    }
+
+    void unClean(){
+        clean = false;
+    }
+
+    void reClean(){
+        clean = true;
     }
 
     @Override
