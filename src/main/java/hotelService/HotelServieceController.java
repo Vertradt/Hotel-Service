@@ -1,6 +1,7 @@
 package hotelService;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,26 +23,23 @@ public class HotelServieceController {
     }
 
     private void menuManager() {
-        boolean gameOver;
         do {
-            gameOver = menuHandling();
+            menuHandling();
         }
         while (!gameOver);
     }
 
-    private boolean menuHandling() {
-        boolean gameOver = false;
+    private void menuHandling() {
         try {
-            gameOver = menu();
-        } catch (ChoiceException | HotelException | BookingException | UnbookingException e) {
+            menu();
+        } catch (ChoiceException | HotelException | GuestAgeException | BookingException | UnbookingException e) {
             System.out.println(e.getMessage());
         }
-        return gameOver;
     }
 
-    private boolean menu() {
+    private void menu() {
         menuDisplaing();
-        return menuSwitcher();
+        menuSwitcher();
     }
 
     private List<String> menuPosition() {
@@ -61,7 +59,7 @@ public class HotelServieceController {
         }
     }
 
-    private boolean menuSwitcher() {
+    private void menuSwitcher() {
         switch (choice()) {
             case ALL_ROOMS:
                 allRoomsDisplaingOption();
@@ -79,14 +77,11 @@ public class HotelServieceController {
                 endGameOption();
                 break;
         }
-        return this.gameOver;
     }
 
     private MenuOptions choice() {
         int menu = scanner.nextInt();
-
-
-        if (menu - 1 >= MenuOptions.ENGAME.getOptionNumber()) {
+        if (menu - 1 > MenuOptions.ENGAME.getOptionNumber()) {
             throw new ChoiceException();
         }
         return MenuOptions.values()[menu - 1]; //To chyba można zrobić lepiej. Ale nie wiem jak.
@@ -110,7 +105,7 @@ public class HotelServieceController {
     }
 
     private void showAvaliableRooms() {
-        List<Room> rooms = userService.avaliableRooms();
+        List<Room> rooms = userService.availableRooms();
         for (Room room : rooms) {
             System.out.println(room);
         }
@@ -121,9 +116,36 @@ public class HotelServieceController {
         showAvaliableRooms();
         System.out.print("Wybrany pokój:");
         int input = scanner.nextInt();
-        userService.booking(input);
+        List<Guest> guests = listOfGuest(input);
+        userService.booking(input, guests);
+        System.out.println("Zarezerwowano pokój");
+
+
     }
 
+    private List<Guest> listOfGuest(int input) {
+        List<Guest> guests = new ArrayList<>();
+        int i = 0;
+        do {
+            Guest guest = addOneGuest();
+            guests.add(guest);
+            i++;
+        } while (i < hotel.findBy(input).getNumberOfBed());
+
+        return guests;
+    }
+
+    private Guest addOneGuest() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wprowadź imie");
+        String imie = scanner.nextLine();
+        System.out.println("Wprowadź nazwisko:");
+        String nazwisko = scanner.nextLine();
+        System.out.println("Wprowadź datę urodzenia gościa (format: rok-miesiąc-dzień):");
+        LocalDate localDate = LocalDate.parse(scanner.nextLine());
+
+        return new Guest(imie, nazwisko, localDate);
+    }
 
     private void unbookingOption() {
         showBookedRooms();

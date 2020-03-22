@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Hotel {
+
     private List<Room> rooms = new ArrayList<>();
 
     Hotel() {
@@ -22,6 +23,7 @@ class Hotel {
     List<Room> getAllRooms() {
         return rooms;
     }
+
     Room findBy(int number) throws HotelException {
         for (Room room : rooms) {
             if (room.getNumber() == number) {
@@ -30,7 +32,6 @@ class Hotel {
         }
         throw new HotelException();
     }
-
 
     List<Room> getAllAvaliableRooms() {
         List<Room> rooms = getAllRooms();
@@ -44,7 +45,7 @@ class Hotel {
         return notBookedRooms;
     }
 
-    public List<Room> getAllBookedRooms() {
+    List<Room> getAllBookedRooms() {
         List<Room> rooms = getAllRooms();
 
         List<Room> bookedRooms = new ArrayList<>();
@@ -56,7 +57,6 @@ class Hotel {
         return bookedRooms;
 
     }
-
 
 
 }

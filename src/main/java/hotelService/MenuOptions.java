@@ -9,6 +9,7 @@ public enum MenuOptions {
 
     private final int optionNumber;
 
+
     MenuOptions(int optionNumber) {
         this.optionNumber = optionNumber;
     }
@@ -16,11 +17,6 @@ public enum MenuOptions {
     public int getOptionNumber() {
         return optionNumber;
     }
-
-
-
-
-
 
 
 }
