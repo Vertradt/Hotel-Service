@@ -1,5 +1,6 @@
 package hotelService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ public class Room {
     private boolean bathroom;
     private boolean booked;
     private boolean clean;
+    private LocalDate bookingDate;
+    private LocalDate unbookingDate;
     private List<Guest> guests = new ArrayList<>();
 
 
@@ -16,7 +19,7 @@ public class Room {
         this.number = number;
         this.numberOfBed = numberOfBed;
         this.bathroom = bathroom;
-        clean = true;
+        this.clean = true;
     }
 
     int getNumber() {
@@ -43,16 +46,32 @@ public class Room {
         guests.addAll(newGuests);
     }
 
-    public boolean isClean() {
-        return clean;
+    boolean isClean() {
+        return !clean;
     }
 
-    void unClean(){
+    void unClean() {
         clean = false;
     }
 
-    void reClean(){
+    void reClean() {
         clean = true;
+    }
+
+    public LocalDate getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public LocalDate getUnbookingDate() {
+        return unbookingDate;
+    }
+
+    public void setUnbookingDate(LocalDate unbookingDate) {
+        this.unbookingDate = unbookingDate;
     }
 
     @Override
@@ -66,6 +85,10 @@ public class Room {
         } else {
             sb.append("zajęty.");
         }
+//        sb.append(" Data zwolnienia ").append(unbookingDate);
         return sb.toString();
     }
+
+
+
 }

@@ -67,12 +67,11 @@ class Hotel {
         List<Room> rooms = getAllRooms();
         List<Room> dirty = new ArrayList<>();
         for (Room room : rooms) {
-            if (!room.isClean()) {
+            if (room.isClean()) {
                 dirty.add(room);
             }
         }
         return dirty;
     }
-
 
 }

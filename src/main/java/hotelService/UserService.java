@@ -1,11 +1,12 @@
 package hotelService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 class UserService {
     private Hotel hotel;
 
-    public UserService(Hotel hotel) {
+    UserService(Hotel hotel) {
         this.hotel = hotel;
     }
 
@@ -17,15 +18,17 @@ class UserService {
         return hotel.getAllAvaliableRooms();
     }
 
-    void booking(Room room, List<Guest> guests) {
+    void booking(Room room, List<Guest> guests, LocalDate bookingDate, LocalDate unbookingDate) {
         validateGuestAge(guests);
         room.addGuest(guests);
+        room.setBookingDate(bookingDate);
+        room.setUnbookingDate(unbookingDate);
         room.book();
     }
 
 
     void validateCleanliness(Room room) {
-        if (!room.isClean()) {
+        if (room.isClean()) {
             throw new CleanlinessException();
         }
     }

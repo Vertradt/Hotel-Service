@@ -50,8 +50,9 @@ public class HotelServieceController {
         menu.add("2. Wszystkie dostępne pokoje.");
         menu.add("3. Bookowanie pokoju.");
         menu.add("4. Sprzątanie pokoju.");
-        menu.add("5. Odbookowanie pokoju.");
-        menu.add("6. Wyjście z programu.");
+        menu.add("5. Zajęte pokoje.");
+        menu.add("6. Odbookowanie pokoju.");
+        menu.add("7. Wyjście z programu.");
 
         return menu;
     }
@@ -70,11 +71,14 @@ public class HotelServieceController {
             case ALL_AVALIABLE_ROOMS:
                 allAvaliableRoomsDisplaingOption();
                 break;
+            case BOOKING:
+                bookingOption();
+                break;
             case CLEANING:
                 cleaningOption();
                 break;
-            case BOOKING:
-                bookingOption();
+            case ALL_BOOKED_ROOMS:
+                allBookedRoomsDisplaingOption();
                 break;
             case UNBOOKING:
                 unbookingOption();
@@ -82,6 +86,13 @@ public class HotelServieceController {
             case ENGAME:
                 endGameOption();
                 break;
+        }
+    }
+
+    private void allBookedRoomsDisplaingOption() {
+        List<Room> list = hotel.getAllBookedRooms();
+        for (Room room : list) {
+            out.println(room.toString() + " Data wymeldowania: "  + room.getUnbookingDate());
         }
     }
 
@@ -122,10 +133,28 @@ public class HotelServieceController {
         showAvaliableRooms();
         Room room = chosenRoom();
         List<Guest> guests = listOfGuest(room);
-        userService.booking(room, guests);
+
+        LocalDate bookingDate = bookingDateAdding();
+        LocalDate unbookingDate = unbookingDateAdding();
+
+        userService.booking(room, guests, bookingDate, unbookingDate);
         out.println("Zarezerwowano pokój");
 
 
+    }
+
+    private LocalDate bookingDateAdding() {
+        out.println("Wprowadź datę zameldowania");
+        Scanner sc = new Scanner(System.in);   // bez napisania tego scannera pojawia mi się: java.time.format.DateTimeParseException: Text 'f' could not be parsed at index 0
+        String string = sc.nextLine();// Możesz mi powiedzieć jak mogę go uniknąć?
+        return LocalDate.parse(string);
+    }
+
+    private LocalDate unbookingDateAdding() {
+        out.println("Wprowadź datę wymeldowania");
+        Scanner sc = new Scanner(System.in);
+        String string = sc.nextLine();
+        return LocalDate.parse(string);
     }
 
     private Room chosenRoom() {

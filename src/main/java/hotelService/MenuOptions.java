@@ -5,8 +5,9 @@ public enum MenuOptions {
     ALL_AVALIABLE_ROOMS(2),
     BOOKING(3),
     CLEANING(4),
-    UNBOOKING(5),
-    ENGAME(6);
+    ALL_BOOKED_ROOMS(5),
+    UNBOOKING(6),
+    ENGAME(7);
 
     private final int optionNumber;
 
