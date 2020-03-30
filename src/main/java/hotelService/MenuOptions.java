@@ -7,7 +7,7 @@ public enum MenuOptions {
     CLEANING(4),
     ALL_BOOKED_ROOMS(5),
     UNBOOKING(6),
-    ENGAME(7);
+    ENDGAME(7);
 
     private final int optionNumber;
 

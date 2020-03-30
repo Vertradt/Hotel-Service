@@ -12,7 +12,7 @@ public class HotelServieceController {
     private Scanner scanner = new Scanner(System.in);
     private Hotel hotel;
     private UserService userService;
-    private boolean gameOver;
+    private boolean programOver;
 
     HotelServieceController(Hotel hotel, UserService userService) {
         this.hotel = hotel;
@@ -28,19 +28,19 @@ public class HotelServieceController {
         do {
             menuHandling();
         }
-        while (!gameOver);
+        while (!programOver);
     }
 
     private void menuHandling() {
         try {
             menu();
-        } catch (ChoiceException | HotelException | GuestAgeException | BookingException | CleanlinessException | UnbookingException e) {
+        } catch (HotelException e) {
             out.println(e.getMessage());
         }
     }
 
     private void menu() {
-        menuDisplaing();
+        showMenu();
         menuSwitcher();
     }
 
@@ -57,7 +57,7 @@ public class HotelServieceController {
         return menu;
     }
 
-    private void menuDisplaing() {
+    private void showMenu() {
         for (String s : menuPosition()) {
             out.println(s);
         }
@@ -83,8 +83,8 @@ public class HotelServieceController {
             case UNBOOKING:
                 unbookingOption();
                 break;
-            case ENGAME:
-                endGameOption();
+            case ENDGAME:
+                endProgramOption();
                 break;
         }
     }
@@ -92,16 +92,17 @@ public class HotelServieceController {
     private void allBookedRoomsDisplaingOption() {
         List<Room> list = hotel.getAllBookedRooms();
         for (Room room : list) {
-            out.println(room.toString() + " Data wymeldowania: "  + room.getUnbookingDate());
+            out.println(room.toString() + " Data wymeldowania: " + room.getUnbookingDate());
         }
     }
 
     private MenuOptions choice() {
-        int menu = scanner.nextInt();
-        if (menu - 1 > MenuOptions.ENGAME.getOptionNumber()) {
+        int userChoice = scanner.nextInt();
+        if (userChoice - 1 > MenuOptions.ENDGAME.ordinal()) {
             throw new ChoiceException();
         }
-        return MenuOptions.values()[menu - 1]; //To chyba można zrobić lepiej. Ale nie wiem jak.
+        int optionIndex = userChoice - 1;
+        return MenuOptions.values()[optionIndex]; //To chyba można zrobić lepiej. Ale nie wiem jak.
     }
 
     private void allRoomsDisplaingOption() {
@@ -238,9 +239,9 @@ public class HotelServieceController {
         }
     }
 
-    private void endGameOption() {
+    private void endProgramOption() {
         out.println("Wyjście z programu");
-        gameOver = true;
+        programOver = true;
     }
 
 }

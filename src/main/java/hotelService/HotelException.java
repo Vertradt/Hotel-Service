@@ -1,7 +1,7 @@
 package hotelService;
 
-class HotelException extends RuntimeException {
-    HotelException() {
-        super("Pokoju nie znaleziono.");
+public class HotelException extends RuntimeException {
+    public HotelException(String message) {
+        super(message);
     }
 }

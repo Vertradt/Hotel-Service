@@ -25,13 +25,13 @@ class Hotel {
         return rooms;
     }
 
-    Room findBy(int number) throws HotelException {
+    Room findBy(int number) throws RoomNotFoundException {
         for (Room room : rooms) {
             if (room.getNumber() == number) {
                 return room;
             }
         }
-        throw new HotelException();
+        throw new RoomNotFoundException();
     }
 
     List<Room> getAllAvaliableRooms() {
